@@ -58,23 +58,16 @@ async function getCategories(){
 async function displayCategories(){
     await getCategories()
     console.log(categories)
+    categories.unshift({id:0,name:"Tous"})
     for(let category of categories){
-        /*
-        console.log(work)
-        let figure = document.createElement("figure")
-        console.log(figure)
-        figure.setAttribute("data-categoryId",work.categoryId)
-        let figcaption = document.createElement("figcaption")
-        console.log(figcaption) 
-        figcaption.innerText= work.title
-        let image =document.createElement("img")
-        image.setAttribute("src",work.imageUrl)
-        image.setAttribute("alt",work.title)
-
-
-        figure.appendChild(image)
-        figure.appendChild(figcaption)
-        gallery.appendChild(figure)*/
+        const button = document.createElement("button")
+        button.textContent=category.name
+        button.setAttribute("data-category",category.id)
+        button.addEventListener("click",function(event){
+            console.log(event.target)
+            const id=event.target.getAttribute("data-category")
+        })
+        filters.appendChild(button)
     }
     
 }
