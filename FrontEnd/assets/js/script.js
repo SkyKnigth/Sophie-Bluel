@@ -66,9 +66,21 @@ async function displayCategories(){
         button.addEventListener("click",function(event){
             console.log(event.target)
             const id=event.target.getAttribute("data-category")
+            Projects(id)
         })
         filters.appendChild(button)
     }
     
 }
 displayCategories()
+
+function Projects(datasetCategory) {
+    const figures = document.querySelectorAll("figure");
+    figures.forEach((figure) => {
+        if (datasetCategory === "0" || figure.getAttribute("data-categoryId") === datasetCategory) {
+            figure.style.display = "block";
+        } else {
+            figure.style.display = "none";
+        }
+    });
+}
