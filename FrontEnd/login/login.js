@@ -33,11 +33,17 @@ document.addEventListener("DOMContentLoaded", function() {
                 console.log('Connexion réussie');
 
             } else {
-                console.error('Erreur lors de la tentative de connexion');
+                console.error('Erreur tentative de connexion');
             }
         })
+        /*.then(data => {
+            const token = data.token;
+            localStorage.setItem('token', token);
+            console.log('Connexion réussie');
+        })*/
+
         .catch(error => {
-            console.error('Erreur lors de la tentative de connexion:', error);
+            console.error('Erreur tentative de connexion:', error);
         });
     });
 });
