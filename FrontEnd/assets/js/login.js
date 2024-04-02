@@ -6,6 +6,9 @@ function validEmail(email) {
 
 document.addEventListener("DOMContentLoaded", function() {
     const loginForm = document.querySelector('.login-container form');
+    const emailErrorDiv = document.getElementById('email-error');
+    const passwordErrorDiv = document.getElementById('password-error');
+    const loginErrorDiv = document.getElementById('login-error');
 
     loginForm.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -15,6 +18,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (!validEmail(emailInput)) {
             console.log('Adresse e-mail invalide');
+            emailErrorDiv.innerText = 'Adresse e-mail invalide';
+            return;
+        }
+
+        if (passwordInput.trim() === "") {
+            console.log('Le champ mot de passe est vide');
+            passwordErrorDiv.innerText = 'Le champ mot de passe est vide';
             return;
         }
 
@@ -31,17 +41,19 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => {
             if (response.ok) {
                 console.log('Connexion réussie');
-
+                
+                response.json()
+                    .then(data => {
+                    const token = data.token;
+                    localStorage.setItem('token', token);
+                    console.log('Connexion réussie');
+                    window.location.href = "/index.html";
+                })
             } else {
                 console.error('Erreur tentative de connexion');
+                loginErrorDiv.innerText = 'Erreur tentative de connexion';
             }
         })
-        /*.then(data => {
-            const token = data.token;
-            localStorage.setItem('token', token);
-            console.log('Connexion réussie');
-        })*/
-
         .catch(error => {
             console.error('Erreur tentative de connexion:', error);
         });
