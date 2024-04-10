@@ -13,7 +13,6 @@ if (token) {
     editMode.innerHTML=`<i class="fa-solid fa-pen-to-square"></i><span>modifier</span>`
     filters.classList.toggle("hidden")
 createEditionMode()
-//let btn_edition =document.getElementById("publier_changements")
 editMode.addEventListener("click",function (event){
 genererModaleGalerie()
 })
