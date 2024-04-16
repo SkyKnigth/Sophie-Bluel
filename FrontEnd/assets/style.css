@@ -63,6 +63,18 @@ section {
 	margin: 50px 0
 }
 
+.filters {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 40px;
+	padding: 5px 10px;
+	border-radius: 25px;
+	background-color: white;
+	border-color: #1D6154;
+	text-decoration: #1D6154;
+
+}
 
 h1{
 	display: flex;
