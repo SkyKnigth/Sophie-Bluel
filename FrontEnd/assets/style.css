@@ -62,11 +62,16 @@ header {
 section {
 	margin: 50px 0
 }
-
-.filters {
+.filters{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	gap: 10px;
+    margin-bottom: 15px;
+}
+
+.filters button {
+
 	height: 40px;
 	padding: 5px 10px;
 	border-radius: 25px;

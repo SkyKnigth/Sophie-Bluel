@@ -1,0 +1,14 @@
+.presentation-images{
+    display: flex;
+    flex-wrap: wrap;
+}
+.presentation-images figure{
+    width: 24%;
+
+}
+
+.presentation-images img{
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+}

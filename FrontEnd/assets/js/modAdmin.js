@@ -1,4 +1,5 @@
-
+const modalContainer = document.getElementById("modalContainer");
+const modalPartOne = document.getElementById("modal-part-one");
 const token = localStorage.getItem("token")
 
 const editMode =document.getElementById("editMode")
@@ -35,11 +36,10 @@ function createEditionMode() {
 
 
 function genererModaleGalerie() {
-    const modalContainer = document.getElementById("modalContainer");
+  
     modalContainer.classList.toggle("hidden");
 
-    const modalPartOne = document.getElementById("modal-part-one");
-    modalPartOne.style.display = "flex";
+    modalPartOne.style.display = "block";
     modalPartOne.innerHTML = "<div class=\"div_closeModal\"><button id=\"closeModal\"><i class=\"fa-solid fa-xmark\"></i></button></div>" +
         "<h3>Galerie Photo</h3>" +
         "<div class=\"presentation-images\"></div>" +
@@ -49,7 +49,7 @@ function genererModaleGalerie() {
     genererModale()
 
     const closeModal = document.getElementById("closeModal");
-   // closeModal.addEventListener("click", fermerModale);
+   closeModal.addEventListener("click", fermerModale);
 
     const overlayModalTrigger = document.getElementById("overlay_modal_trigger");
     //overlayModalTrigger.addEventListener("click", fermerModale);
@@ -58,6 +58,7 @@ function genererModaleGalerie() {
     ajoutPhoto.addEventListener("click", function () {
         genererModaleAjout;
     });
+
 }
 
 async function genererModale(){
@@ -95,3 +96,6 @@ async function genererModale(){
 
 }
 
+function fermerModale(){
+modalContainer.classList.toggle("hidden")
+}
