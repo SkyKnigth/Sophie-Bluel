@@ -79,7 +79,23 @@ async function genererModale(){
         image.setAttribute("src",work.imageUrl)
         image.setAttribute("alt",work.title)
 
+        const boutonSuppr = document.createElement("button");
+        boutonSuppr.innerHTML = "<i class=\"fa-solid fa-trash-can\"></i>";
+        boutonSuppr.addEventListener("click",function(event){
+            console.log(boutonSuppr)
+            //fetch boutonSuppr
 
+            fetch(YOUR_URL, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': 'Bearer my-token',
+                    'Content-Type': 'application/json'
+                },
+                
+              })
+        })
+
+        figure.appendChild(boutonSuppr)
         figure.appendChild(image)
         figure.appendChild(figcaption)
         presentationImage.appendChild(figure)
@@ -90,9 +106,7 @@ async function genererModale(){
    // boutonMove.id = "boutonMove";
 
 
-    const boutonSuppr = document.createElement("button");
-    boutonSuppr.innerHTML = "<i class=\"fa-solid fa-trash-can\"></i>";
-   // boutonSuppr.id = "boutonSuppr";
+
 
 }
 
