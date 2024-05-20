@@ -16,6 +16,7 @@ async function getWorks(){
 async function displayWorks(){
     await getWorks()
     console.log(works)
+    gallery.innerHTML=""
     for(let work of works){
         console.log(work)
         let figure = document.createElement("figure")
