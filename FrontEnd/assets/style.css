@@ -48,17 +48,57 @@ table {
 }
 /** end reset css**/
 body {
-	max-width: 1140px;
-	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 	background: #FFFEF8;
 }
 header {
+	max-width: 1140px;
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px auto;
 }
+
+#header_edition{
+    background-color: black;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10PX 0;
+	gap: 5PX;
+}
+
+#header_edition i,
+#header_edition p{
+	color: white;
+}
+#header_edition i{
+	height: 20px;
+}
+
+main{
+	max-width: 1140px;
+	margin:auto;
+}
+
+.portfolio-title{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 4em;
+	gap: 20px;
+
+}
+
+#editMode{
+	display: flex;
+    justify-content: center;
+	gap: 10px;
+}
+
+
+
 section {
 	margin: 50px 0
 }
@@ -141,10 +181,7 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
-#portfolio h2 {
-	text-align: center;
-	margin-bottom: 1em;
-}
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -209,3 +246,4 @@ footer nav ul {
 .hidden{
 	display: none;
 }
+

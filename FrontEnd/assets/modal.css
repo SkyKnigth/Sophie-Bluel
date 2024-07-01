@@ -2,9 +2,9 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    width: 80%;
-    margin-right: auto;
-    margin-left: auto;
+    width: 100%;
+    margin-left: 0%;
+    margin-right: 0%;
 }
 .presentation-images figure{
     width: 19%;
@@ -14,7 +14,7 @@
 
 .presentation-images img{
     width: 100%;
-    height: 120px;
+    height: 150px;
     object-fit: cover;
     padding-bottom: 25px;
 }
@@ -58,3 +58,80 @@ h3{
 
 	padding: 10px 12px;
 }
+
+#closeModal {
+    position: absolute;
+    top: 15px; 
+    right: 15px; 
+    background: none; 
+    border: none; 
+    font-size: 20px; 
+    color: black; 
+    cursor: pointer; 
+}
+
+#button-Back{
+	position: absolute;
+    top: 19px; 
+    left: 15px; 
+    background: none; 
+    border: none; 
+    font-size: 20px; 
+    color: black; 
+    cursor: pointer; 
+}
+
+.file-label {
+    position: relative; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    width: 150px; 
+    height: 40px; 
+    background-color: #CBD6DC; 
+    border-radius: 5px; 
+	margin: 0 auto;
+    cursor: pointer; 
+    overflow: hidden; 
+}
+
+
+input[type="file"] {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    opacity: 0; 
+    width: 100%; 
+    height: 100%; 
+    cursor: pointer; 
+}
+
+
+.file-label span {
+    color: transparent; /
+}
+
+#modalContainer p {
+    text-align: center;
+    margin-top: 10px;
+    color: #306685;
+    margin: 10px auto; 
+}
+
+
+input[type="file"]:not(:focus) + span,
+input[type="file"]:focus + span,
+input[type="file"] + span {
+    color: #306685; 
+}
+#modal-part-one{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#modal-part-one h3{
+    font-size: 20px;
+    height: 50px
+}
+
