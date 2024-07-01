@@ -1,6 +1,7 @@
 const modalContainer = document.getElementById("modalContainer");
 const modalPartOne = document.getElementById("modal-part-one");
 const modalPartTwo = document.getElementById("modal-part-two");
+const overlayModalTrigger = document.getElementById("overlay_modal_trigger");
 const token = localStorage.getItem("token")
 
 const editMode =document.getElementById("editMode")
@@ -39,10 +40,11 @@ function genererModaleGalerie() {
   
     modalContainer.classList.toggle("hidden");
 
-    modalPartOne.style.display = "block";
+    modalPartOne.classList.toggle("hidden");
     modalPartOne.innerHTML = "<div class=\"div_closeModal\"><button id=\"closeModal\"><i class=\"fa-solid fa-xmark\"></i></button></div>" +
         "<h3>Galerie Photo</h3>" +
         "<div class=\"presentation-images\"></div>" +
+        "<hr>" +
         "<button id=\"ajoutPhoto\">Ajouter une photo</button>" 
     
     genererModale()
@@ -50,13 +52,13 @@ function genererModaleGalerie() {
     const closeModal = document.getElementById("closeModal");
    closeModal.addEventListener("click", fermerModale);
 
-    const overlayModalTrigger = document.getElementById("overlay_modal_trigger");
-    //overlayModalTrigger.addEventListener("click", fermerModale);
+    
+    overlayModalTrigger.addEventListener("click", fermerModale);
 
     const ajoutPhoto = document.getElementById("ajoutPhoto");
     ajoutPhoto.addEventListener("click", function () {
-        modalPartTwo.style.display="block";
-        modalPartOne.style.display="none";
+        modalPartTwo.classList.toggle("hidden");
+        modalPartOne.classList.toggle("hidden");
     });
 
 }
@@ -127,6 +129,13 @@ async function genererModale(){
 
 function fermerModale(){
 modalContainer.classList.toggle("hidden")
+if (modalPartOne.classList.contains("hidden")){
+    modalPartOne.classList.toggle("hidden")
+}
+if (modalPartTwo.classList.contains("hidden")){
+
+    modalPartTwo.classList.toggle("hidden")
+}
 }
 
 
