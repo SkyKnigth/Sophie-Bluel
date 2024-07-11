@@ -143,6 +143,11 @@ async function genererModale2() {
             <hr class="custom-hr">
             <button type="submit" id="valider" disabled>Valider</button>
         </form>`;
+
+    /* const closeModal = document.getElementById("closeModal");
+    closeModal.addEventListener("click", function () {
+        modalContainer.classList.add("hidden");
+    });*/
     
     const buttonBack = document.getElementById("button-Back");
     buttonBack.addEventListener("click", function () {
