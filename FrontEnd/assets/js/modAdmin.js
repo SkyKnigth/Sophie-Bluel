@@ -121,20 +121,25 @@ async function genererModale2() {
     <i class="fa-regular fa-image"></i>
     <label for="fileInput" class="file-label">
     <input name="image" type="file" id="fileInput"/>
-    <span>+ Ajouter une Photo</span>
+    <span>+ Ajouter photo</span>
 </label>
     <p>jpg png : 4mo max </p>
     </div> 
-    <div>
-        <label for="title">Titre</label>
-        <input class="title-field" id="title" name="title" type="text"/>
+    <div class="position">
+        <div>
+            <label for="title">Titre</label>
+            <input class="title-field" id="title" name="title" type="text"/>
+        </div>
+        <div>
+            <label for="selectCategory">Catégorie</label>
+            <select class="title-categories" id="selectCategory">
+            </select>
+        </div>
     </div>
-    <div>
-        <label for="selectCategory">Catégorie</label>
-        <select id="selectCategory">
-        </select>
-    </div>
+        <hr class="custom-hr">
+        <button type="submit" id="valider" disabled>Valider</button>
     </form>`;
+    
 
     const buttonBack = document.getElementById("button-Back");
     buttonBack.addEventListener("click", function () {
@@ -159,3 +164,4 @@ async function generateSelect() {
 }
 
 generateSelect();
+
