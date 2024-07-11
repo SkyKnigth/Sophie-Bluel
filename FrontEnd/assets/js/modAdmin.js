@@ -115,32 +115,35 @@ function fermerModale() {
 }
 
 async function genererModale2() {
-    modalPartTwo.innerHTML = `<i id="button-Back" class="fa-solid fa-arrow-left"></i><div class="div_closeModal"><button id="closeModal"><i class="fa-solid fa-xmark"></i></button></div> <h3>Ajout Photo</h3> 
-    <form method="post" action="/" enctype="multipart/form-data">
-    <div class="icon">
-    <i class="fa-regular fa-image"></i>
-    <label for="fileInput" class="file-label">
-    <input name="image" type="file" id="fileInput"/>
-    <span>+ Ajouter photo</span>
-</label>
-    <p>jpg png : 4mo max </p>
-    </div> 
-    <div class="position">
-        <div>
-            <label for="title">Titre</label>
-            <input class="title-field" id="title" name="title" type="text"/>
-        </div>
-        <div>
-            <label for="selectCategory">Catégorie</label>
-            <select class="title-categories" id="selectCategory">
-            </select>
-        </div>
-    </div>
-        <hr class="custom-hr">
-        <button type="submit" id="valider" disabled>Valider</button>
-    </form>`;
+    modalPartTwo.innerHTML = `
+        <i id="button-Back" class="fa-solid fa-arrow-left"></i>
+        <div class="div_closeModal">
+            <button id="closeModal"><i class="fa-solid fa-xmark"></i></button>
+        </div> 
+        <h3>Ajout Photo</h3> 
+        <form method="post" action="/" enctype="multipart/form-data" id="ajoutPhotoForm">
+            <div class="icon">
+                <i class="fa-regular fa-image"></i>
+                <label for="fileInput" class="file-label">
+                    <input name="image" type="file" id="fileInput"/>
+                    <span>+ Ajouter photo</span>
+                </label>
+                <p>jpg png : 4mo max </p>
+            </div> 
+            <div class="position">
+                <div>
+                    <label for="title">Titre</label>
+                    <input class="title-field" id="title" name="title" type="text"/>
+                </div>
+                <div>
+                    <label for="selectCategory">Catégorie</label>
+                    <select class="title-categories" id="selectCategory"></select>
+                </div>
+            </div>
+            <hr class="custom-hr">
+            <button type="submit" id="valider" disabled>Valider</button>
+        </form>`;
     
-
     const buttonBack = document.getElementById("button-Back");
     buttonBack.addEventListener("click", function () {
         modalPartTwo.classList.add("hidden");
@@ -148,12 +151,68 @@ async function genererModale2() {
     });
 
     generateSelect();
+
+    const form = document.getElementById("ajoutPhotoForm");
+    const validerButton = document.getElementById("valider");
+
+    form.addEventListener("input", function () {
+        const isValid = form.checkValidity();
+        if (isValid) {
+
+            validerButton.classList.add("active");
+            validerButton.removeAttribute("disabled");
+        } else {
+
+            validerButton.classList.remove("active");
+            validerButton.setAttribute("disabled", "disabled");
+        }
+    });
+
+    validerButton.addEventListener("click", addWork);
+}
+
+async function addWork(event) {
+    event.preventDefault();
+
+    const title = document.querySelector(".title-field").value;
+    const categoryId = document.querySelector(".title-categories").value;
+    const image = document.getElementById("fileInput").files[0];
+
+    if (title === "" || categoryId === "" || image === undefined) {
+        alert("Merci de remplir tous les champs");
+        return;
+    } else {
+        try {
+            const formData = new FormData();
+            formData.append("title", title);
+            formData.append("category", categoryId);
+            formData.append("image", image);
+
+            const response = await fetch("http://localhost:5678/api/works", {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                body: formData,
+            });
+
+            if (response.status === 201) {
+                alert("Projet ajouté");
+                fermerModale();
+            } else {
+                alert("Une erreur est survenue");
+            }
+        } catch (error) {
+            console.log(error);
+            alert("Erreur de connexion au serveur");
+        }
+    }
 }
 
 async function generateSelect() {
     await getCategories();
     const selectCategory = document.getElementById("selectCategory");
-    selectCategory.innerHTML = ''; // Clear previous options if any
+    selectCategory.innerHTML = ''; 
     for (let category of categories) {
         console.log(category);
         const option = document.createElement("option");
