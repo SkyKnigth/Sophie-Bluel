@@ -57,6 +57,10 @@ async function displayCategories(){
         button.addEventListener("click",function(event){
             console.log(event.target)
             const id=event.target.getAttribute("data-category")
+            const buttons = document.querySelectorAll(".filters button");
+            buttons.forEach(btn => btn.classList.remove("active"));
+            event.target.classList.add("active");
+  
             Projects(id)
         })
         filters.appendChild(button)
