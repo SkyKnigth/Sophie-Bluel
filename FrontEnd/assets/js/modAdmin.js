@@ -118,7 +118,7 @@ async function genererModale2() {
     modalPartTwo.innerHTML = `
         <i id="button-Back" class="fa-solid fa-arrow-left"></i>
         <div class="div_closeModal">
-            <button id="closeModal"><i class="fa-solid fa-xmark"></i></button>
+            <button id="closeModal2"><i class="fa-solid fa-xmark"></i></button>
         </div> 
         <h3>Ajout Photo</h3> 
         <form method="post" action="/" enctype="multipart/form-data" id="ajoutPhotoForm">
@@ -129,6 +129,9 @@ async function genererModale2() {
                     <span>+ Ajouter photo</span>
                 </label>
                 <p>jpg png : 4mo max </p>
+                <div id="imagePreview" style="display: none;">
+                    <img id="preview" src="#" alt="Aperçu de l'image">
+                </div>
             </div> 
             <div class="position">
                 <div>
@@ -144,10 +147,10 @@ async function genererModale2() {
             <button type="submit" id="valider" disabled>Valider</button>
         </form>`;
 
-    /* const closeModal = document.getElementById("closeModal");
-    closeModal.addEventListener("click", function () {
+     const closeModal2 = document.getElementById("closeModal2");
+    closeModal2.addEventListener("click", function () {
         modalContainer.classList.add("hidden");
-    });*/
+    });
     
     const buttonBack = document.getElementById("button-Back");
     buttonBack.addEventListener("click", function () {
@@ -161,8 +164,9 @@ async function genererModale2() {
     const validerButton = document.getElementById("valider");
 
     form.addEventListener("input", function () {
-        const isValid = form.checkValidity();
-        if (isValid) {
+
+        console.log(form.elements)
+        if (form.elements[0].value !== '') {
 
             validerButton.classList.add("active");
             validerButton.removeAttribute("disabled");
@@ -173,7 +177,32 @@ async function genererModale2() {
         }
     });
 
+    document.getElementById('fileInput').addEventListener('change', previewImage);
+
     validerButton.addEventListener("click", addWork);
+}
+
+function previewImage() {
+    const file = document.getElementById('fileInput').files[0];
+    const preview = document.getElementById('preview');
+    const imagePreview = document.getElementById('imagePreview');
+    const fileLabel = document.querySelector('.file-label')
+
+    const reader = new FileReader();
+
+    reader.onloadend = function () {
+        preview.src = reader.result;
+        imagePreview.style.display = 'block';
+        fileLabel.style.display = 'none';
+
+    }
+
+    if (file) {
+        reader.readAsDataURL(file);
+    } else {
+        preview.src = "#";
+        imagePreview.style.display = 'none';
+    }
 }
 
 async function addWork(event) {
@@ -227,5 +256,4 @@ async function generateSelect() {
     }
 }
 
-generateSelect();
 
