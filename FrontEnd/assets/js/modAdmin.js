@@ -164,14 +164,15 @@ async function genererModale2() {
     const validerButton = document.getElementById("valider");
 
     form.addEventListener("input", function () {
+        const titleField = form.querySelector("#title").value.trim();
+        const categoryField = form.querySelector("#selectCategory").value;
+        const imageField = form.querySelector("#fileInput").files.length;
 
-        console.log(form.elements)
-        if (form.elements[0].value !== '') {
-
+        // Activez le bouton seulement si les trois champs sont remplis
+        if (titleField !== '' && categoryField !== '' && imageField > 0) {
             validerButton.classList.add("active");
             validerButton.removeAttribute("disabled");
         } else {
-
             validerButton.classList.remove("active");
             validerButton.setAttribute("disabled", "disabled");
         }
