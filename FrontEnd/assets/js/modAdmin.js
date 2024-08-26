@@ -12,6 +12,8 @@ if (token) {
     logout.href = "/";
     logout.addEventListener("click", () => {
         localStorage.removeItem("token");
+        const headerEdition = document.getElementById("header_edition");
+        headerEdition.style.display= "none"
     });
     editMode.innerHTML = `<i class="fa-solid fa-pen-to-square"></i><span>modifier</span>`;
     filters.classList.toggle("hidden");
