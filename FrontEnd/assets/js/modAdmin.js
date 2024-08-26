@@ -232,6 +232,8 @@ async function addWork(event) {
             });
 
             if (response.status === 201) {
+                displayWorks()
+                genererModale()
                 alert("Projet ajouté");
                 fermerModale();
             } else {
