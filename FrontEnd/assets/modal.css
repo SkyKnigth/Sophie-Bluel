@@ -242,3 +242,8 @@ hr{
     display: block;
     object-fit: contain;
 }
+
+.error-message {
+    color: red;
+    display: none;
+}

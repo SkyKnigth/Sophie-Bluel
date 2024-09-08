@@ -53,6 +53,10 @@ async function displayCategories(){
     for(let category of categories){
         const button = document.createElement("button")
         button.textContent=category.name
+        if(category.name === "Tous"){
+            button.classList.add("active")
+        }
+
         button.setAttribute("data-category",category.id)
         button.addEventListener("click",function(event){
             console.log(event.target)

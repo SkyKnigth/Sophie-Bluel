@@ -7,13 +7,16 @@ const token = localStorage.getItem("token");
 
 const editMode = document.getElementById("editMode");
 if (token) {
+    const headerEdition = document.getElementById("header_edition");
+    headerEdition.classList.toggle("hidden")
     let logout = document.querySelector(".logout");
     logout.innerHTML = "logout";
     logout.href = "/";
     logout.addEventListener("click", () => {
         localStorage.removeItem("token");
-        const headerEdition = document.getElementById("header_edition");
-        headerEdition.style.display= "none"
+        headerEdition.classList.toggle("hidden")
+        console.log(headerEdition)
+
     });
     editMode.innerHTML = `<i class="fa-solid fa-pen-to-square"></i><span>modifier</span>`;
     filters.classList.toggle("hidden");
@@ -122,6 +125,7 @@ async function genererModale2() {
         <div class="div_closeModal">
             <button id="closeModal2"><i class="fa-solid fa-xmark"></i></button>
         </div> 
+        
         <h3>Ajout Photo</h3> 
         <form method="post" action="/" enctype="multipart/form-data" id="ajoutPhotoForm">
             <div class="icon">
@@ -136,6 +140,7 @@ async function genererModale2() {
                 </div>
             </div> 
             <div class="position">
+                <div id="error-message" class="error-message"></div>
                 <div>
                     <label for="title">Titre</label>
                     <input class="title-field" id="title" name="title" type="text"/>
@@ -149,11 +154,11 @@ async function genererModale2() {
             <button type="submit" id="valider" disabled>Valider</button>
         </form>`;
 
-     const closeModal2 = document.getElementById("closeModal2");
+    const closeModal2 = document.getElementById("closeModal2");
     closeModal2.addEventListener("click", function () {
         modalContainer.classList.add("hidden");
     });
-    
+
     const buttonBack = document.getElementById("button-Back");
     buttonBack.addEventListener("click", function () {
         modalPartTwo.classList.add("hidden");
@@ -164,19 +169,27 @@ async function genererModale2() {
 
     const form = document.getElementById("ajoutPhotoForm");
     const validerButton = document.getElementById("valider");
+    const errorMessage = document.getElementById("error-message");
 
     form.addEventListener("input", function () {
         const titleField = form.querySelector("#title").value.trim();
         const categoryField = form.querySelector("#selectCategory").value;
         const imageField = form.querySelector("#fileInput").files.length;
 
-        // Activez le bouton seulement si les trois champs sont remplis
         if (titleField !== '' && categoryField !== '' && imageField > 0) {
             validerButton.classList.add("active");
             validerButton.removeAttribute("disabled");
+            errorMessage.style.display = "none";
         } else {
             validerButton.classList.remove("active");
             validerButton.setAttribute("disabled", "disabled");
+
+            if (titleField === '') {
+                errorMessage.innerHTML = "Champ à compléter obligatoire pour le titre.";
+                errorMessage.style.display = "block";
+            } else {
+                errorMessage.style.display = "none";
+            }
         }
     });
 
@@ -260,5 +273,6 @@ async function generateSelect() {
         selectCategory.appendChild(option);
     }
 }
+
 
 

@@ -49,10 +49,20 @@ document.addEventListener("DOMContentLoaded", function() {
                     console.log('Connexion réussie');
                     window.location.href = "/index.html";
                 })
+            } else if (response.status === 401) { 
+                console.error('Mot de passe incorrect');
+                loginErrorDiv.innerText = 'Mot de passe incorrect.';
+                loginErrorDiv.classList.add('error-message');
+            } else if (response.status === 404) { 
+                console.error('Adresse e-mail incorrecte');
+                loginErrorDiv.innerText = 'Adresse e-mail incorrecte.';
+                loginErrorDiv.classList.add('error-message');
             } else {
                 console.error('Erreur tentative de connexion');
-                loginErrorDiv.innerText = 'Erreur tentative de connexion';
+                loginErrorDiv.innerText = 'Erreur lors de la tentative de connexion. Veuillez réessayer plus tard.';
+                loginErrorDiv.classList.add('error-message');
             }
+        
         })
         .catch(error => {
             console.error('Erreur tentative de connexion:', error);
