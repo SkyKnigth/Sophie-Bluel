@@ -11,7 +11,7 @@ if (token) {
     headerEdition.classList.toggle("hidden")
     let logout = document.querySelector(".logout");
     logout.innerHTML = "logout";
-    logout.href = "/";
+    logout.href = "./index.html";
     logout.addEventListener("click", () => {
         localStorage.removeItem("token");
         headerEdition.classList.toggle("hidden")

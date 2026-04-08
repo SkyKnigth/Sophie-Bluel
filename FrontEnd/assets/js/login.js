@@ -6,8 +6,6 @@ function validEmail(email) {
 
 document.addEventListener("DOMContentLoaded", function() {
     const loginForm = document.querySelector('.login-container form');
-    const emailErrorDiv = document.getElementById('email-error');
-    const passwordErrorDiv = document.getElementById('password-error');
     const loginErrorDiv = document.getElementById('login-error');
 
     loginForm.addEventListener('submit', function(event) {
@@ -16,15 +14,17 @@ document.addEventListener("DOMContentLoaded", function() {
         const emailInput = document.getElementById('email').value;
         const passwordInput = document.getElementById('password').value;
 
+        loginErrorDiv.innerText = "";
+
         if (!validEmail(emailInput)) {
-            console.log('Adresse e-mail invalide');
-            emailErrorDiv.innerText = 'Adresse e-mail invalide';
+            loginErrorDiv.innerText = "Erreur dans l’identifiant ou le mot de passe";
+            loginErrorDiv.classList.add('error-message');
             return;
         }
 
         if (passwordInput.trim() === "") {
-            console.log('Le champ mot de passe est vide');
-            passwordErrorDiv.innerText = 'Le champ mot de passe est vide';
+            loginErrorDiv.innerText = "Erreur dans l’identifiant ou le mot de passe";
+            loginErrorDiv.classList.add('error-message');
             return;
         }
 
@@ -41,28 +41,19 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => {
             if (response.ok) {
                 console.log('Connexion réussie');
-                
+
                 response.json()
                     .then(data => {
                     const token = data.token;
                     localStorage.setItem('token', token);
                     console.log('Connexion réussie');
-                    window.location.href = "/index.html";
-                })
-            } else if (response.status === 401) { 
-                console.error('Mot de passe incorrect');
-                loginErrorDiv.innerText = 'Mot de passe incorrect.';
-                loginErrorDiv.classList.add('error-message');
-            } else if (response.status === 404) { 
-                console.error('Adresse e-mail incorrecte');
-                loginErrorDiv.innerText = 'Adresse e-mail incorrecte.';
-                loginErrorDiv.classList.add('error-message');
+                    window.location.href = "./index.html";
+                });
             } else {
-                console.error('Erreur tentative de connexion');
-                loginErrorDiv.innerText = 'Erreur lors de la tentative de connexion. Veuillez réessayer plus tard.';
+                loginErrorDiv.innerText = "Erreur dans l’identifiant ou le mot de passe";
                 loginErrorDiv.classList.add('error-message');
             }
-        
+
         })
         .catch(error => {
             console.error('Erreur tentative de connexion:', error);
